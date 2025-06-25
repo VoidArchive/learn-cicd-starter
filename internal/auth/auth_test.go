@@ -26,4 +26,3 @@ func TestGetAPIKey_NoAuthHeader(t *testing.T) {
 		t.Errorf("Expected ErrNoAuthHeaderIncluded, got: %v", err)
 	}
 }
-
