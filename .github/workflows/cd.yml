@@ -9,17 +9,22 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.23.0"
+
       - name: Build
         run: ./scripts/buildprod.sh
+
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-          project_id: root-slate-464103-q8
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
       - name: Build and push Docker image
-        run: gcloud builds submit --tag us-central1-docker.pkg.dev/root-slate-464103-q8/notely-ar-repo/learn-cicd-starter:latest .
+        run: gcloud builds submit --project=root-slate-464103-q8 --tag us-central1-docker.pkg.dev/root-slate-464103-q8/notely-ar-repo/learn-cicd-starter:latest .
