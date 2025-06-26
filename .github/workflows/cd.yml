@@ -19,6 +19,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          project_id: root-slate-464103-q8
 
       - name: Build and push Docker image
-        run: gcloud builds submit --tag us-central1-docker.pkg.dev/root-slate-464103-q8/notely-ar-repo
+        run: gcloud builds submit --tag us-central1-docker.pkg.dev/root-slate-464103-q8/notely-ar-repo/learn-cicd-starter:latest .
