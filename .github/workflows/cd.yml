@@ -15,3 +15,10 @@ jobs:
           go-version: "1.23.0"
       - name: Build
         run: ./scripts/buildprod.sh
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Build and push Docker image
+        run: gcloud builds submit --tags us-central1-docker.pkg.dev/root-slate-464103-q8/notely-ar-repo
